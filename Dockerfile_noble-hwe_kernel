@@ -6,14 +6,14 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y --no-install-recommends \
         wget ca-certificates \
         build-essential \
-        linux-headers-6.17.0-19-generic \
+        linux-headers-generic-hwe-24.04 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY . .
 
-ENV KERNEL_BASE_DIR=/lib/modules/6.17.0-19-generic
+ENV KERNEL_BASE_DIR=/lib/modules/*
 ENV SYSSRC=${KERNEL_BASE_DIR}/build
 
 CMD ["./buildtest"]
