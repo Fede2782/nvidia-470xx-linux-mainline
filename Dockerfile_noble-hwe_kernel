@@ -1,20 +1,19 @@
-# Test the build against a legacy kernel
-FROM docker.io/library/debian:oldoldstable
+# Test the build against the ubuntu:devel kernel config
+FROM docker.io/library/ubuntu:noble
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         wget ca-certificates \
         build-essential \
-        linux-headers-generic \
+        linux-headers-6.17.0-19-generic \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY . .
 
-ENV KERNEL_BASE_DIR=/lib/modules/*
-ENV SYSSRC=${KERNEL_BASE_DIR}/source
-ENV SYSOUT=${KERNEL_BASE_DIR}/build
+ENV KERNEL_BASE_DIR=/lib/modules/6.17.0-19-generic
+ENV SYSSRC=${KERNEL_BASE_DIR}/build
 
 CMD ["./buildtest"]
