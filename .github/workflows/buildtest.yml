@@ -3,6 +3,8 @@ name: Build test NVIDIA driver patches
 on:
   push:
     branches: [ master ]
+  schedule:
+     - cron: "0 0 * * 2"
   pull_request:
   workflow_dispatch:
 
