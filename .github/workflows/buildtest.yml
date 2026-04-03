@@ -16,7 +16,7 @@ jobs:
         kernel: [noble-hwe]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Build against the ${{ matrix.kernel }} kernel
         run: make test-${{ matrix.kernel }}
